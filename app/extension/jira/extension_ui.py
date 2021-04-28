@@ -68,8 +68,8 @@ def app_specific_action(webdriver, datasets):
             issue_modal.fill_description_create(rte_status)  # Fill description field
             set_issue_type(issue_modal)  # Set issue type to Risk
             issue_modal.submit_issue()
-            issue_modal.wait_until_clickable((By.ID, 'logo'))
         create_risk_issue()
+        base_page.dismiss_popup('.aui-message-success .aui-close-button')
 
         @print_timing("selenium_app_custom_action:edit_risk_assessment")
         def edit_risk_assessment():
