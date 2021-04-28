@@ -41,32 +41,32 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="cfInherentImpact" elementType="Argument">
             <stringProp name="Argument.name">cfInherentImpact</stringProp>
-            <stringProp name="Argument.value">10112</stringProp>
+            <stringProp name="Argument.value">11100</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="cfInherentProbab" elementType="Argument">
             <stringProp name="Argument.name">cfInherentProbab</stringProp>
-            <stringProp name="Argument.value">10113</stringProp>
+            <stringProp name="Argument.value">11101</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="cfResidualImpact" elementType="Argument">
             <stringProp name="Argument.name">cfResidualImpact</stringProp>
-            <stringProp name="Argument.value">10114</stringProp>
+            <stringProp name="Argument.value">11102</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="cfResidualProbab" elementType="Argument">
             <stringProp name="Argument.name">cfResidualProbab</stringProp>
-            <stringProp name="Argument.value">10115</stringProp>
+            <stringProp name="Argument.value">11103</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="cfTreatment" elementType="Argument">
             <stringProp name="Argument.name">cfTreatment</stringProp>
-            <stringProp name="Argument.value">10120</stringProp>
+            <stringProp name="Argument.value">11108</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="riskIssueTypeId" elementType="Argument">
             <stringProp name="Argument.name">riskIssueTypeId</stringProp>
-            <stringProp name="Argument.value">10005</stringProp>
+            <stringProp name="Argument.value">10400</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="statusClosed" elementType="Argument">
@@ -76,12 +76,12 @@
           </elementProp>
           <elementProp name="cfImpactHigh" elementType="Argument">
             <stringProp name="Argument.name">cfImpactHigh</stringProp>
-            <stringProp name="Argument.value">10010</stringProp>
+            <stringProp name="Argument.value">11207</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="cfProbabLikely" elementType="Argument">
             <stringProp name="Argument.name">cfProbabLikely</stringProp>
-            <stringProp name="Argument.value">10021</stringProp>
+            <stringProp name="Argument.value">11218</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
@@ -193,25 +193,12 @@ props.put(&quot;project_pages&quot;, String.valueOf(pages));</stringProp>
           <boolProp name="TransactionController.parent">false</boolProp>
         </TransactionController>
         <hashTree>
-          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Login Data" enabled="true">
-            <stringProp name="TestPlan.comments">CSV file that must contains rows with 2 columns separated by comma, first column will be mapped to login, second one to password</stringProp>
-            <stringProp name="delimiter">,</stringProp>
-            <stringProp name="fileEncoding">UTF-8</stringProp>
-            <stringProp name="filename">auth.csv</stringProp>
-            <boolProp name="quotedData">false</boolProp>
-            <boolProp name="recycle">true</boolProp>
-            <stringProp name="shareMode">shareMode.all</stringProp>
-            <boolProp name="stopThread">false</boolProp>
-            <stringProp name="variableNames">user,pass</stringProp>
-            <boolProp name="ignoreFirstLine">false</boolProp>
-          </CSVDataSet>
-          <hashTree/>
           <AuthManager guiclass="AuthPanel" testclass="AuthManager" testname="HTTP Authorization Manager" enabled="true">
             <collectionProp name="AuthManager.auth_list">
               <elementProp name="" elementType="Authorization">
                 <stringProp name="Authorization.url">${application.protocol}://${application.hostname}</stringProp>
-                <stringProp name="Authorization.username">${user}</stringProp>
-                <stringProp name="Authorization.password">${pass}</stringProp>
+                <stringProp name="Authorization.username">admin</stringProp>
+                <stringProp name="Authorization.password">admin</stringProp>
                 <stringProp name="Authorization.domain"></stringProp>
                 <stringProp name="Authorization.realm"></stringProp>
                 <stringProp name="Authorization.mechanism">BASIC_DIGEST</stringProp>
@@ -241,10 +228,16 @@ props.put(&quot;project_pages&quot;, String.valueOf(pages));</stringProp>
               </elementProp>
               <elementProp name="Accept" elementType="Header">
                 <stringProp name="Header.name">Accept</stringProp>
-                <stringProp name="Header.value">*/*</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
               </elementProp>
             </collectionProp>
           </HeaderManager>
+          <hashTree/>
+          <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="debug sampler" enabled="true">
+            <boolProp name="displayJMeterProperties">false</boolProp>
+            <boolProp name="displayJMeterVariables">true</boolProp>
+            <boolProp name="displaySystemProperties">false</boolProp>
+          </DebugSampler>
           <hashTree/>
           <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Turn all projects into Risk Registers" enabled="true">
             <boolProp name="TransactionController.includeTimers">false</boolProp>
