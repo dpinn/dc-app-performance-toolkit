@@ -69,6 +69,8 @@ def app_specific_action(webdriver, datasets):
             set_issue_type(issue_modal)  # Set issue type to Risk
             issue_modal.submit_issue()
         create_risk_issue()
+        # We have to dismiss the flag message that Jira pops up to indicate successful issue creation.
+        # If we don't do this, we get UnexpectedPopupMessageExceptions when the tests run.
         base_page.dismiss_popup('.aui-message-success .aui-close-button')
 
         @print_timing("selenium_app_custom_action:edit_risk_assessment")
