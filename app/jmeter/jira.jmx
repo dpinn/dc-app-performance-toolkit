@@ -1340,6 +1340,10 @@ JMeterUtils.setProperty(&quot;c_AtlToken&quot; + user_counter, atl_token)
                       <stringProp name="Header.name">Accept</stringProp>
                       <stringProp name="Header.value">*/*</stringProp>
                     </elementProp>
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">X-Atlassian-Token</stringProp>
+                      <stringProp name="Header.value">no-check</stringProp>
+                    </elementProp>
                   </collectionProp>
                 </HeaderManager>
                 <hashTree/>
@@ -1699,8 +1703,9 @@ def delay_between_transactions = (1000 * 3600) / (vars.get(&quot;total_actions_p
 //Sets the pacing length based on the last requests response time. x is the time in ms
 def start_time = Long.valueOf(vars.get(&quot;loop_start_time&quot;))
 def sleep_time = (delay_between_transactions - (System.currentTimeMillis() - start_time)) as int
+def action_time = delay_between_transactions - sleep_time as int
 
-log.info(&quot;concurrency: &quot; + concurrency + &quot;, delay_between_transactions: &quot; + delay_between_transactions + &quot;, thread_sleep: &quot; + sleep_time)
+log.info(&quot;concurrency: ${concurrency}, delay_between_transactions: ${delay_between_transactions}, thread_sleep: ${sleep_time}, jmeter_create_issue action_time: ${action_time}&quot;)
 
 if ( sleep_time &gt; 0 ) {
     return sleep_time
@@ -2660,8 +2665,9 @@ def delay_between_transactions = (1000 * 3600) / (vars.get(&quot;total_actions_p
 //Sets the pacing length based on the last requests response time. x is the time in ms
 def start_time = Long.valueOf(vars.get(&quot;loop_start_time&quot;))
 def sleep_time = (delay_between_transactions - (System.currentTimeMillis() - start_time)) as int
+def action_time = delay_between_transactions - sleep_time as int
 
-log.info(&quot;concurrency: &quot; + concurrency + &quot;, delay_between_transactions: &quot; + delay_between_transactions + &quot;, thread_sleep: &quot; + sleep_time)
+log.info(&quot;concurrency: ${concurrency}, delay_between_transactions: ${delay_between_transactions}, thread_sleep: ${sleep_time}, jmeter_search_jql action_time: ${action_time}&quot;)
 
 if ( sleep_time &gt; 0 ) {
     return sleep_time
@@ -3223,8 +3229,10 @@ def delay_between_transactions = (1000 * 3600) / (vars.get(&quot;total_actions_p
 //Sets the pacing length based on the last requests response time. x is the time in ms
 def start_time = Long.valueOf(vars.get(&quot;loop_start_time&quot;))
 def sleep_time = (delay_between_transactions - (System.currentTimeMillis() - start_time)) as int
+def action_time = delay_between_transactions - sleep_time as int
 
-log.info(&quot;concurrency: &quot; + concurrency + &quot;, delay_between_transactions: &quot; + delay_between_transactions + &quot;, thread_sleep: &quot; + sleep_time)
+log.info(&quot;concurrency: ${concurrency}, delay_between_transactions: ${delay_between_transactions}, thread_sleep: ${sleep_time}, jmeter_view_issue action_time: ${action_time}&quot;)
+
 
 if ( sleep_time &gt; 0 ) {
     return sleep_time
@@ -3757,8 +3765,10 @@ def delay_between_transactions = (1000 * 3600) / (vars.get(&quot;total_actions_p
 //Sets the pacing length based on the last requests response time. x is the time in ms
 def start_time = Long.valueOf(vars.get(&quot;loop_start_time&quot;))
 def sleep_time = (delay_between_transactions - (System.currentTimeMillis() - start_time)) as int
+def action_time = delay_between_transactions - sleep_time as int
 
-log.info(&quot;concurrency: &quot; + concurrency + &quot;, delay_between_transactions: &quot; + delay_between_transactions + &quot;, thread_sleep: &quot; + sleep_time)
+log.info(&quot;concurrency: ${concurrency}, delay_between_transactions: ${delay_between_transactions}, thread_sleep: ${sleep_time}, jmeter_view_project_summary action_time: ${action_time}&quot;)
+
 
 if ( sleep_time &gt; 0 ) {
     return sleep_time
@@ -4225,8 +4235,9 @@ def delay_between_transactions = (1000 * 3600) / (vars.get(&quot;total_actions_p
 //Sets the pacing length based on the last requests response time. x is the time in ms
 def start_time = Long.valueOf(vars.get(&quot;loop_start_time&quot;))
 def sleep_time = (delay_between_transactions - (System.currentTimeMillis() - start_time)) as int
+def action_time = delay_between_transactions - sleep_time as int
 
-log.info(&quot;concurrency: &quot; + concurrency + &quot;, delay_between_transactions: &quot; + delay_between_transactions + &quot;, thread_sleep: &quot; + sleep_time)
+log.info(&quot;concurrency: ${concurrency}, delay_between_transactions: ${delay_between_transactions}, thread_sleep: ${sleep_time}, jmeter_view_dashboard action_time: ${action_time}&quot;)
 
 if ( sleep_time &gt; 0 ) {
     return sleep_time
@@ -5259,8 +5270,9 @@ def delay_between_transactions = (1000 * 3600) / (vars.get(&quot;total_actions_p
 //Sets the pacing length based on the last requests response time. x is the time in ms
 def start_time = Long.valueOf(vars.get(&quot;loop_start_time&quot;))
 def sleep_time = (delay_between_transactions - (System.currentTimeMillis() - start_time)) as int
+def action_time = delay_between_transactions - sleep_time as int
 
-log.info(&quot;concurrency: &quot; + concurrency + &quot;, delay_between_transactions: &quot; + delay_between_transactions + &quot;, thread_sleep: &quot; + sleep_time)
+log.info(&quot;concurrency: ${concurrency}, delay_between_transactions: ${delay_between_transactions}, thread_sleep: ${sleep_time}, jmeter_edit_issue action_time: ${action_time}&quot;)
 
 if ( sleep_time &gt; 0 ) {
     return sleep_time
@@ -6098,8 +6110,9 @@ def delay_between_transactions = (1000 * 3600) / (vars.get(&quot;total_actions_p
 //Sets the pacing length based on the last requests response time. x is the time in ms
 def start_time = Long.valueOf(vars.get(&quot;loop_start_time&quot;))
 def sleep_time = (delay_between_transactions - (System.currentTimeMillis() - start_time)) as int
+def action_time = delay_between_transactions - sleep_time as int
 
-log.info(&quot;concurrency: &quot; + concurrency + &quot;, delay_between_transactions: &quot; + delay_between_transactions + &quot;, thread_sleep: &quot; + sleep_time)
+log.info(&quot;concurrency: ${concurrency}, delay_between_transactions: ${delay_between_transactions}, thread_sleep: ${sleep_time}, jmeter_add_comment action_time: ${action_time}&quot;)
 
 if ( sleep_time &gt; 0 ) {
     return sleep_time
@@ -6377,8 +6390,9 @@ def delay_between_transactions = (1000 * 3600) / (vars.get(&quot;total_actions_p
 //Sets the pacing length based on the last requests response time. x is the time in ms
 def start_time = Long.valueOf(vars.get(&quot;loop_start_time&quot;))
 def sleep_time = (delay_between_transactions - (System.currentTimeMillis() - start_time)) as int
+def action_time = delay_between_transactions - sleep_time as int
 
-log.info(&quot;concurrency: &quot; + concurrency + &quot;, delay_between_transactions: &quot; + delay_between_transactions + &quot;, thread_sleep: &quot; + sleep_time)
+log.info(&quot;concurrency: ${concurrency}, delay_between_transactions: ${delay_between_transactions}, thread_sleep: ${sleep_time}, jmeter_browse_projects action_time: ${action_time}&quot;)
 
 if ( sleep_time &gt; 0 ) {
     return sleep_time
@@ -7168,7 +7182,7 @@ if ( sleep_time &gt; 0 ) {
                     <collectionProp name="Arguments.arguments">
                       <elementProp name="" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                        <stringProp name="Argument.value">{&quot;id&quot;:&quot;com.pyxis.greenhopper.jira:project-sidebar-work-${x_project_plan}&quot;}&#xd;
+                        <stringProp name="Argument.value">{&quot;id&quot;:&quot;com.pyxis.greenhopper.jira:project-sidebar-work-kanban&quot;}&#xd;
 </stringProp>
                         <stringProp name="Argument.metadata">=</stringProp>
                       </elementProp>
@@ -7236,8 +7250,9 @@ def delay_between_transactions = (1000 * 3600) / (vars.get(&quot;total_actions_p
 //Sets the pacing length based on the last requests response time. x is the time in ms
 def start_time = Long.valueOf(vars.get(&quot;loop_start_time&quot;))
 def sleep_time = (delay_between_transactions - (System.currentTimeMillis() - start_time)) as int
+def action_time = delay_between_transactions - sleep_time as int
 
-log.info(&quot;concurrency: &quot; + concurrency + &quot;, delay_between_transactions: &quot; + delay_between_transactions + &quot;, thread_sleep: &quot; + sleep_time)
+log.info(&quot;concurrency: ${concurrency}, delay_between_transactions: ${delay_between_transactions}, thread_sleep: ${sleep_time}, jmeter_view_kanban_board action_time: ${action_time}&quot;)
 
 if ( sleep_time &gt; 0 ) {
     return sleep_time
@@ -7976,7 +7991,7 @@ if ( sleep_time &gt; 0 ) {
                     <collectionProp name="Arguments.arguments">
                       <elementProp name="" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                        <stringProp name="Argument.value">{&quot;id&quot;:&quot;com.pyxis.greenhopper.jira:project-sidebar-work-${x_project_plan}&quot;}&#xd;
+                        <stringProp name="Argument.value">{&quot;id&quot;:&quot;com.pyxis.greenhopper.jira:project-sidebar-work-scrum&quot;}&#xd;
 </stringProp>
                         <stringProp name="Argument.metadata">=</stringProp>
                       </elementProp>
@@ -8088,8 +8103,9 @@ def delay_between_transactions = (1000 * 3600) / (vars.get(&quot;total_actions_p
 //Sets the pacing length based on the last requests response time. x is the time in ms
 def start_time = Long.valueOf(vars.get(&quot;loop_start_time&quot;))
 def sleep_time = (delay_between_transactions - (System.currentTimeMillis() - start_time)) as int
+def action_time = delay_between_transactions - sleep_time as int
 
-log.info(&quot;concurrency: &quot; + concurrency + &quot;, delay_between_transactions: &quot; + delay_between_transactions + &quot;, thread_sleep: &quot; + sleep_time)
+log.info(&quot;concurrency: ${concurrency}, delay_between_transactions: ${delay_between_transactions}, thread_sleep: ${sleep_time}, jmeter_view_scrum_board action_time: ${action_time}&quot;)
 
 if ( sleep_time &gt; 0 ) {
     return sleep_time
@@ -8987,7 +9003,7 @@ if ( sleep_time &gt; 0 ) {
                     <collectionProp name="Arguments.arguments">
                       <elementProp name="" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                        <stringProp name="Argument.value">{&quot;id&quot;:&quot;com.pyxis.greenhopper.jira:project-sidebar-work-${x_project_plan}&quot;}&#xd;
+                        <stringProp name="Argument.value">{&quot;id&quot;:&quot;com.pyxis.greenhopper.jira:project-sidebar-work-scrum&quot;}&#xd;
 </stringProp>
                         <stringProp name="Argument.metadata">=</stringProp>
                       </elementProp>
@@ -9055,8 +9071,9 @@ def delay_between_transactions = (1000 * 3600) / (vars.get(&quot;total_actions_p
 //Sets the pacing length based on the last requests response time. x is the time in ms
 def start_time = Long.valueOf(vars.get(&quot;loop_start_time&quot;))
 def sleep_time = (delay_between_transactions - (System.currentTimeMillis() - start_time)) as int
+def action_time = delay_between_transactions - sleep_time as int
 
-log.info(&quot;concurrency: &quot; + concurrency + &quot;, delay_between_transactions: &quot; + delay_between_transactions + &quot;, thread_sleep: &quot; + sleep_time)
+log.info(&quot;concurrency: ${concurrency}, delay_between_transactions: ${delay_between_transactions}, thread_sleep: ${sleep_time}, jmeter_view_backlog action_time: ${action_time}&quot;)
 
 if ( sleep_time &gt; 0 ) {
     return sleep_time
@@ -9351,8 +9368,9 @@ def delay_between_transactions = (1000 * 3600) / (vars.get(&quot;total_actions_p
 //Sets the pacing length based on the last requests response time. x is the time in ms
 def start_time = Long.valueOf(vars.get(&quot;loop_start_time&quot;))
 def sleep_time = (delay_between_transactions - (System.currentTimeMillis() - start_time)) as int
+def action_time = delay_between_transactions - sleep_time as int
 
-log.info(&quot;concurrency: &quot; + concurrency + &quot;, delay_between_transactions: &quot; + delay_between_transactions + &quot;, thread_sleep: &quot; + sleep_time)
+log.info(&quot;concurrency: ${concurrency}, delay_between_transactions: ${delay_between_transactions}, thread_sleep: ${sleep_time}, jmeter_browse_boards action_time: ${action_time}&quot;)
 
 if ( sleep_time &gt; 0 ) {
     return sleep_time
@@ -10355,8 +10373,9 @@ def delay_between_transactions = (1000 * 3600) / (vars.get(&quot;total_actions_p
 //Sets the pacing length based on the last requests response time. x is the time in ms
 def start_time = Long.valueOf(vars.get(&quot;loop_start_time&quot;))
 def sleep_time = (delay_between_transactions - (System.currentTimeMillis() - start_time)) as int
+def action_time = delay_between_transactions - sleep_time as int
 
-log.info(&quot;concurrency: &quot; + concurrency + &quot;, delay_between_transactions: &quot; + delay_between_transactions + &quot;, thread_sleep: &quot; + sleep_time)
+log.info(&quot;concurrency: ${concurrency}, delay_between_transactions: ${delay_between_transactions}, thread_sleep: ${sleep_time}, jmeter_standalone_extension action_time: ${action_time}&quot;)
 
 if ( sleep_time &gt; 0 ) {
     return sleep_time
