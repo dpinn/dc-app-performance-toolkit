@@ -46,14 +46,14 @@ def app_specific_action(webdriver, datasets):
                 choose_risk_issue_type()
 
     def set_impact(issue_page):
-        impact_field = issue_page.get_elements((By.ID, 'customfield_10112'))
+        impact_field = issue_page.get_elements((By.ID, 'customfield_11100'))
         if impact_field:
             drop_down_length = len(issue_page.select(impact_field[0]).options)
             random_impact_id = random.randint(1, drop_down_length - 1)
             issue_page.select(impact_field[0]).select_by_index(random_impact_id)
 
     def set_probab(issue_page):
-        probab_field = issue_page.get_elements((By.ID, 'customfield_10113'))
+        probab_field = issue_page.get_elements((By.ID, 'customfield_11101'))
         if probab_field:
             drop_down_length = len(issue_page.select(probab_field[0]).options)
             random_probab_id = random.randint(1, drop_down_length - 1)
