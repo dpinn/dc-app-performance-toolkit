@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
   <hashTree>
-    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
-      <stringProp name="TestPlan.comments"></stringProp>
-      <boolProp name="TestPlan.functional_mode">false</boolProp>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan">
       <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
-      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
-      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
         <collectionProp name="Arguments.arguments"/>
       </elementProp>
-      <stringProp name="TestPlan.user_define_classpath"></stringProp>
     </TestPlan>
     <hashTree>
       <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="Global Variables">
@@ -165,29 +161,28 @@
         </elementProp>
       </SetupThreadGroup>
       <hashTree>
-        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="page count" enabled="true">
+        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="page count">
           <intProp name="ActionProcessor.action">1</intProp>
           <intProp name="ActionProcessor.target">0</intProp>
           <stringProp name="ActionProcessor.duration">0</stringProp>
         </TestAction>
         <hashTree>
-          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="get count projects page" enabled="true">
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="get count projects page">
             <boolProp name="resetInterpreter">false</boolProp>
             <stringProp name="parameters"></stringProp>
             <stringProp name="filename"></stringProp>
             <stringProp name="script">import org.apache.commons.io.FileUtils;
 
-// TODO Rework hard-codded path
-int projects = FileUtils.readLines(new File(&quot;datasets/jira/projects.csv&quot;)).size();
-int page_size = 25;
-int pages = (projects % page_size == 0) ? projects / page_size : projects / page_size + 1;
-props.put(&quot;project_pages&quot;, String.valueOf(pages));</stringProp>
+              // TODO Rework hard-codded path
+              int projects = FileUtils.readLines(new File(&quot;datasets/jira/projects.csv&quot;)).size();
+              int page_size = 25;
+              int pages = (projects % page_size == 0) ? projects / page_size : projects / page_size + 1;
+              props.put(&quot;project_pages&quot;, String.valueOf(pages));</stringProp>
           </BeanShellPreProcessor>
           <hashTree/>
         </hashTree>
         <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="One-time set-up for Risk Register" enabled="false">
           <boolProp name="TransactionController.includeTimers">false</boolProp>
-          <boolProp name="TransactionController.parent">false</boolProp>
         </TransactionController>
         <hashTree>
           <AuthManager guiclass="AuthPanel" testclass="AuthManager" testname="HTTP Authorization Manager" enabled="true">
@@ -231,27 +226,19 @@ props.put(&quot;project_pages&quot;, String.valueOf(pages));</stringProp>
           </HeaderManager>
           <hashTree/>
           <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Turn all projects into Risk Registers" enabled="true">
-            <boolProp name="TransactionController.includeTimers">false</boolProp>
             <boolProp name="TransactionController.parent">true</boolProp>
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
           </TransactionController>
           <hashTree>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get all projects" enabled="true">
-              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+              <stringProp name="HTTPSampler.path">${application.postfix}/rest/api/2/project</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <stringProp name="HTTPSampler.method">GET</stringProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
                 <collectionProp name="Arguments.arguments"/>
               </elementProp>
-              <stringProp name="HTTPSampler.domain"></stringProp>
-              <stringProp name="HTTPSampler.port"></stringProp>
-              <stringProp name="HTTPSampler.protocol"></stringProp>
-              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-              <stringProp name="HTTPSampler.path">${application.postfix}/rest/api/2/project</stringProp>
-              <stringProp name="HTTPSampler.method">GET</stringProp>
-              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-              <stringProp name="HTTPSampler.response_timeout"></stringProp>
             </HTTPSamplerProxy>
             <hashTree>
               <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Extract project ids" enabled="true">
@@ -268,6 +255,10 @@ props.put(&quot;project_pages&quot;, String.valueOf(pages));</stringProp>
             </ForeachController>
             <hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Make project a risk register" enabled="true">
+                <stringProp name="HTTPSampler.path">${application.postfix}/rest/projectbalm/riskregister/latest/registers</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
                 <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                   <collectionProp name="Arguments.arguments">
@@ -278,26 +269,13 @@ props.put(&quot;project_pages&quot;, String.valueOf(pages));</stringProp>
                     </elementProp>
                   </collectionProp>
                 </elementProp>
-                <stringProp name="HTTPSampler.domain"></stringProp>
-                <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.protocol"></stringProp>
-                <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-                <stringProp name="HTTPSampler.path">${application.postfix}/rest/projectbalm/riskregister/latest/registers</stringProp>
-                <stringProp name="HTTPSampler.method">POST</stringProp>
-                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
             </hashTree>
           </hashTree>
           <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Create a bunch of AppIssue issues" enabled="true">
-            <boolProp name="TransactionController.includeTimers">false</boolProp>
             <boolProp name="TransactionController.parent">true</boolProp>
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
           </TransactionController>
           <hashTree>
             <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Create 200 risks in ABC project" enabled="true">
@@ -306,6 +284,10 @@ props.put(&quot;project_pages&quot;, String.valueOf(pages));</stringProp>
             </LoopController>
             <hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Create risk" enabled="true">
+                <stringProp name="HTTPSampler.path">${application.postfix}/rest/api/2/issue</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
                 <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                   <collectionProp name="Arguments.arguments">
@@ -323,19 +305,6 @@ props.put(&quot;project_pages&quot;, String.valueOf(pages));</stringProp>
                     </elementProp>
                   </collectionProp>
                 </elementProp>
-                <stringProp name="HTTPSampler.domain"></stringProp>
-                <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.protocol"></stringProp>
-                <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-                <stringProp name="HTTPSampler.path">${application.postfix}/rest/api/2/issue</stringProp>
-                <stringProp name="HTTPSampler.method">POST</stringProp>
-                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree>
                 <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Extract issue id and key" enabled="true">
@@ -347,6 +316,10 @@ props.put(&quot;project_pages&quot;, String.valueOf(pages));</stringProp>
                 <hashTree/>
               </hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Add risk assessment" enabled="true">
+                <stringProp name="HTTPSampler.path">${application.postfix}/rest/projectbalm/riskregister/latest/issue/${issue_key}/assessment</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <stringProp name="HTTPSampler.method">PUT</stringProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                 <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
                 <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                   <collectionProp name="Arguments.arguments">
@@ -363,26 +336,13 @@ props.put(&quot;project_pages&quot;, String.valueOf(pages));</stringProp>
                     </elementProp>
                   </collectionProp>
                 </elementProp>
-                <stringProp name="HTTPSampler.domain"></stringProp>
-                <stringProp name="HTTPSampler.port"></stringProp>
-                <stringProp name="HTTPSampler.protocol"></stringProp>
-                <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-                <stringProp name="HTTPSampler.path">${application.postfix}/rest/projectbalm/riskregister/latest/issue/${issue_key}/assessment</stringProp>
-                <stringProp name="HTTPSampler.method">PUT</stringProp>
-                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                <stringProp name="HTTPSampler.response_timeout"></stringProp>
               </HTTPSamplerProxy>
               <hashTree/>
             </hashTree>
           </hashTree>
         </hashTree>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Jira" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Jira">
         <intProp name="ThreadGroup.num_threads">1</intProp>
         <intProp name="ThreadGroup.ramp_time">0</intProp>
         <longProp name="ThreadGroup.duration">0</longProp>
@@ -1198,17 +1158,6 @@ JMeterUtils.setProperty(&quot;c_AtlToken&quot; + user_counter, atl_token)
             <stringProp name="fileEncoding">UTF-8</stringProp>
             <stringProp name="delimiter">,</stringProp>
             <stringProp name="variableNames">issue_key,issue_id,issue_project_key</stringProp>
-            <boolProp name="randomOrder">false</boolProp>
-            <boolProp name="ignoreFirstLine">false</boolProp>
-            <boolProp name="rewindOnTheEndOfList">true</boolProp>
-            <boolProp name="independentListPerThread">false</boolProp>
-          </com.blazemeter.jmeter.RandomCSVDataSetConfig>
-          <hashTree/>
-          <com.blazemeter.jmeter.RandomCSVDataSetConfig guiclass="com.blazemeter.jmeter.RandomCSVDataSetConfigGui" testclass="com.blazemeter.jmeter.RandomCSVDataSetConfig" testname="custom issues" enabled="true">
-            <stringProp name="filename">datasets/jira/custom-issues.csv</stringProp>
-            <stringProp name="fileEncoding">UTF-8</stringProp>
-            <stringProp name="delimiter">,</stringProp>
-            <stringProp name="variableNames">custom_issue_key,custom_issue_id,custom_issue_project_key</stringProp>
             <boolProp name="randomOrder">false</boolProp>
             <boolProp name="ignoreFirstLine">false</boolProp>
             <boolProp name="rewindOnTheEndOfList">true</boolProp>
@@ -7715,12 +7664,18 @@ if (response_data.name != vars.get(&quot;app_specific_username&quot;)) {
             </TransactionController>
             <hashTree>
               <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="jmeter_app_specific_action:view_risk" enabled="true">
-                <boolProp name="TransactionController.includeTimers">false</boolProp>
                 <boolProp name="TransactionController.parent">true</boolProp>
+                <boolProp name="TransactionController.includeTimers">false</boolProp>
               </TransactionController>
               <hashTree>
                 <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get risk assessment panel" enabled="true">
-                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+                  <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+                  <stringProp name="HTTPSampler.path">${application.postfix}/plugins/servlet/com.projectbalm.riskregister/assessment</stringProp>
+                  <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                  <stringProp name="HTTPSampler.method">GET</stringProp>
+                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                  <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
                     <collectionProp name="Arguments.arguments">
                       <elementProp name="key" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">true</boolProp>
@@ -7731,19 +7686,6 @@ if (response_data.name != vars.get(&quot;app_specific_username&quot;)) {
                       </elementProp>
                     </collectionProp>
                   </elementProp>
-                  <stringProp name="HTTPSampler.domain"></stringProp>
-                  <stringProp name="HTTPSampler.port"></stringProp>
-                  <stringProp name="HTTPSampler.protocol"></stringProp>
-                  <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-                  <stringProp name="HTTPSampler.path">${application.postfix}/plugins/servlet/com.projectbalm.riskregister/assessment</stringProp>
-                  <stringProp name="HTTPSampler.method">GET</stringProp>
-                  <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-                  <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                  <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                  <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 </HTTPSamplerProxy>
                 <hashTree>
                   <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
@@ -7777,7 +7719,13 @@ if (response_data.name != vars.get(&quot;app_specific_username&quot;)) {
                   <hashTree/>
                 </hashTree>
                 <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get relevant risk model" enabled="true">
-                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                  <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+                  <stringProp name="HTTPSampler.path">${application.postfix}/rest/projectbalm/riskregister/latest/models/relevant</stringProp>
+                  <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                  <stringProp name="HTTPSampler.method">GET</stringProp>
+                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                  <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
                     <collectionProp name="Arguments.arguments">
                       <elementProp name="project" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">true</boolProp>
@@ -7788,19 +7736,6 @@ if (response_data.name != vars.get(&quot;app_specific_username&quot;)) {
                       </elementProp>
                     </collectionProp>
                   </elementProp>
-                  <stringProp name="HTTPSampler.domain"></stringProp>
-                  <stringProp name="HTTPSampler.port"></stringProp>
-                  <stringProp name="HTTPSampler.protocol"></stringProp>
-                  <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-                  <stringProp name="HTTPSampler.path">${application.postfix}/rest/projectbalm/riskregister/latest/models/relevant</stringProp>
-                  <stringProp name="HTTPSampler.method">GET</stringProp>
-                  <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-                  <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                  <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                  <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 </HTTPSamplerProxy>
                 <hashTree>
                   <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
@@ -7842,22 +7777,14 @@ if (response_data.name != vars.get(&quot;app_specific_username&quot;)) {
               </ThroughputController>
               <hashTree>
                 <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get fields" enabled="true">
-                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+                  <stringProp name="HTTPSampler.path">${application.postfix}/rest/projectbalm/riskregister/latest/fields</stringProp>
+                  <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                  <stringProp name="HTTPSampler.method">GET</stringProp>
+                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                  <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
                     <collectionProp name="Arguments.arguments"/>
                   </elementProp>
-                  <stringProp name="HTTPSampler.domain"></stringProp>
-                  <stringProp name="HTTPSampler.port"></stringProp>
-                  <stringProp name="HTTPSampler.protocol"></stringProp>
-                  <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-                  <stringProp name="HTTPSampler.path">${application.postfix}/rest/projectbalm/riskregister/latest/fields</stringProp>
-                  <stringProp name="HTTPSampler.method">GET</stringProp>
-                  <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-                  <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                  <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                  <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 </HTTPSamplerProxy>
                 <hashTree>
                   <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
@@ -7887,7 +7814,13 @@ if (response_data.name != vars.get(&quot;app_specific_username&quot;)) {
                   <hashTree/>
                 </hashTree>
                 <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get relevant risk model" enabled="true">
-                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                  <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+                  <stringProp name="HTTPSampler.path">${application.postfix}/rest/projectbalm/riskregister/latest/models/relevant</stringProp>
+                  <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                  <stringProp name="HTTPSampler.method">GET</stringProp>
+                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                  <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
                     <collectionProp name="Arguments.arguments">
                       <elementProp name="project" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">true</boolProp>
@@ -7898,19 +7831,6 @@ if (response_data.name != vars.get(&quot;app_specific_username&quot;)) {
                       </elementProp>
                     </collectionProp>
                   </elementProp>
-                  <stringProp name="HTTPSampler.domain"></stringProp>
-                  <stringProp name="HTTPSampler.port"></stringProp>
-                  <stringProp name="HTTPSampler.protocol"></stringProp>
-                  <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-                  <stringProp name="HTTPSampler.path">${application.postfix}/rest/projectbalm/riskregister/latest/models/relevant</stringProp>
-                  <stringProp name="HTTPSampler.method">GET</stringProp>
-                  <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-                  <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                  <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                  <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 </HTTPSamplerProxy>
                 <hashTree>
                   <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
@@ -7940,7 +7860,12 @@ if (response_data.name != vars.get(&quot;app_specific_username&quot;)) {
                   <hashTree/>
                 </hashTree>
                 <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Search for risks" enabled="true">
-                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+                  <stringProp name="HTTPSampler.path">${application.postfix}/rest/api/2/search</stringProp>
+                  <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                  <stringProp name="HTTPSampler.method">GET</stringProp>
+                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                  <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
                     <collectionProp name="Arguments.arguments">
                       <elementProp name="jql" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">true</boolProp>
@@ -7965,19 +7890,6 @@ if (response_data.name != vars.get(&quot;app_specific_username&quot;)) {
                       </elementProp>
                     </collectionProp>
                   </elementProp>
-                  <stringProp name="HTTPSampler.domain"></stringProp>
-                  <stringProp name="HTTPSampler.port"></stringProp>
-                  <stringProp name="HTTPSampler.protocol"></stringProp>
-                  <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-                  <stringProp name="HTTPSampler.path">${application.postfix}/rest/api/2/search</stringProp>
-                  <stringProp name="HTTPSampler.method">GET</stringProp>
-                  <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-                  <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                  <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                  <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 </HTTPSamplerProxy>
                 <hashTree>
                   <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
@@ -8007,8 +7919,8 @@ if (response_data.name != vars.get(&quot;app_specific_username&quot;)) {
                   <hashTree/>
                 </hashTree>
                 <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Update user preferences" enabled="true">
-                  <boolProp name="TransactionController.includeTimers">false</boolProp>
                   <boolProp name="TransactionController.parent">true</boolProp>
+                  <boolProp name="TransactionController.includeTimers">false</boolProp>
                 </TransactionController>
                 <hashTree>
                   <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
@@ -8037,6 +7949,10 @@ if (response_data.name != vars.get(&quot;app_specific_username&quot;)) {
                   </HeaderManager>
                   <hashTree/>
                   <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Update risk basis" enabled="true">
+                    <stringProp name="HTTPSampler.path">${application.postfix}/rest/api/2/mypreferences?key=com.projectbalm.riskregister.riskbasis</stringProp>
+                    <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                    <stringProp name="HTTPSampler.method">PUT</stringProp>
+                    <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                     <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
                     <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                       <collectionProp name="Arguments.arguments">
@@ -8047,22 +7963,13 @@ if (response_data.name != vars.get(&quot;app_specific_username&quot;)) {
                         </elementProp>
                       </collectionProp>
                     </elementProp>
-                    <stringProp name="HTTPSampler.domain"></stringProp>
-                    <stringProp name="HTTPSampler.port"></stringProp>
-                    <stringProp name="HTTPSampler.protocol"></stringProp>
-                    <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-                    <stringProp name="HTTPSampler.path">${application.postfix}/rest/api/2/mypreferences?key=com.projectbalm.riskregister.riskbasis</stringProp>
-                    <stringProp name="HTTPSampler.method">PUT</stringProp>
-                    <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-                    <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-                    <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                    <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                    <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-                    <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                    <stringProp name="HTTPSampler.response_timeout"></stringProp>
                   </HTTPSamplerProxy>
                   <hashTree/>
                   <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Update link mode" enabled="true">
+                    <stringProp name="HTTPSampler.path">${application.postfix}/rest/api/2/mypreferences?key=com.projectbalm.riskregister.risklinkmode</stringProp>
+                    <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                    <stringProp name="HTTPSampler.method">PUT</stringProp>
+                    <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                     <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
                     <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                       <collectionProp name="Arguments.arguments">
@@ -8073,22 +7980,13 @@ if (response_data.name != vars.get(&quot;app_specific_username&quot;)) {
                         </elementProp>
                       </collectionProp>
                     </elementProp>
-                    <stringProp name="HTTPSampler.domain"></stringProp>
-                    <stringProp name="HTTPSampler.port"></stringProp>
-                    <stringProp name="HTTPSampler.protocol"></stringProp>
-                    <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-                    <stringProp name="HTTPSampler.path">${application.postfix}/rest/api/2/mypreferences?key=com.projectbalm.riskregister.risklinkmode</stringProp>
-                    <stringProp name="HTTPSampler.method">PUT</stringProp>
-                    <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-                    <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-                    <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                    <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                    <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-                    <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                    <stringProp name="HTTPSampler.response_timeout"></stringProp>
                   </HTTPSamplerProxy>
                   <hashTree/>
                   <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Update sub-view" enabled="true">
+                    <stringProp name="HTTPSampler.path">${application.postfix}/rest/api/2/mypreferences?key=com.projectbalm.riskregister.subview</stringProp>
+                    <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                    <stringProp name="HTTPSampler.method">PUT</stringProp>
+                    <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
                     <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
                     <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
                       <collectionProp name="Arguments.arguments">
@@ -8099,19 +7997,6 @@ if (response_data.name != vars.get(&quot;app_specific_username&quot;)) {
                         </elementProp>
                       </collectionProp>
                     </elementProp>
-                    <stringProp name="HTTPSampler.domain"></stringProp>
-                    <stringProp name="HTTPSampler.port"></stringProp>
-                    <stringProp name="HTTPSampler.protocol"></stringProp>
-                    <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-                    <stringProp name="HTTPSampler.path">${application.postfix}/rest/api/2/mypreferences?key=com.projectbalm.riskregister.subview</stringProp>
-                    <stringProp name="HTTPSampler.method">PUT</stringProp>
-                    <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-                    <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-                    <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                    <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                    <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-                    <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                    <stringProp name="HTTPSampler.response_timeout"></stringProp>
                   </HTTPSamplerProxy>
                   <hashTree/>
                 </hashTree>
@@ -8128,22 +8013,15 @@ if (response_data.name != vars.get(&quot;app_specific_username&quot;)) {
               </ThroughputController>
               <hashTree>
                 <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get gadget configuration" enabled="true">
-                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-                    <collectionProp name="Arguments.arguments"/>
-                  </elementProp>
-                  <stringProp name="HTTPSampler.domain"></stringProp>
-                  <stringProp name="HTTPSampler.port"></stringProp>
-                  <stringProp name="HTTPSampler.protocol"></stringProp>
                   <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
                   <stringProp name="HTTPSampler.path">${application.postfix}/rest/projectbalm/riskregister/latest/gadget/matrix/config</stringProp>
-                  <stringProp name="HTTPSampler.method">GET</stringProp>
                   <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-                  <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                  <stringProp name="HTTPSampler.method">GET</stringProp>
                   <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                  <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                  <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
+                  <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+                    <collectionProp name="Arguments.arguments"/>
+                  </elementProp>
                 </HTTPSamplerProxy>
                 <hashTree>
                   <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
@@ -8173,7 +8051,13 @@ if (response_data.name != vars.get(&quot;app_specific_username&quot;)) {
                   <hashTree/>
                 </hashTree>
                 <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get relevant risk model" enabled="true">
-                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+                  <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+                  <stringProp name="HTTPSampler.path">${application.postfix}/rest/projectbalm/riskregister/latest/models/relevant</stringProp>
+                  <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                  <stringProp name="HTTPSampler.method">GET</stringProp>
+                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                  <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
                     <collectionProp name="Arguments.arguments">
                       <elementProp name="project" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">true</boolProp>
@@ -8184,19 +8068,6 @@ if (response_data.name != vars.get(&quot;app_specific_username&quot;)) {
                       </elementProp>
                     </collectionProp>
                   </elementProp>
-                  <stringProp name="HTTPSampler.domain"></stringProp>
-                  <stringProp name="HTTPSampler.port"></stringProp>
-                  <stringProp name="HTTPSampler.protocol"></stringProp>
-                  <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
-                  <stringProp name="HTTPSampler.path">${application.postfix}/rest/projectbalm/riskregister/latest/models/relevant</stringProp>
-                  <stringProp name="HTTPSampler.method">GET</stringProp>
-                  <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-                  <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                  <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                  <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 </HTTPSamplerProxy>
                 <hashTree>
                   <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
@@ -8226,22 +8097,15 @@ if (response_data.name != vars.get(&quot;app_specific_username&quot;)) {
                   <hashTree/>
                 </hashTree>
                 <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get default risk model" enabled="true">
-                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-                    <collectionProp name="Arguments.arguments"/>
-                  </elementProp>
-                  <stringProp name="HTTPSampler.domain"></stringProp>
-                  <stringProp name="HTTPSampler.port"></stringProp>
-                  <stringProp name="HTTPSampler.protocol"></stringProp>
                   <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
                   <stringProp name="HTTPSampler.path">${application.postfix}/rest/projectbalm/riskregister/latest/models/default</stringProp>
-                  <stringProp name="HTTPSampler.method">GET</stringProp>
                   <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-                  <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                  <stringProp name="HTTPSampler.method">GET</stringProp>
                   <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                  <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                  <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
+                  <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+                    <collectionProp name="Arguments.arguments"/>
+                  </elementProp>
                 </HTTPSamplerProxy>
                 <hashTree>
                   <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
@@ -8271,7 +8135,12 @@ if (response_data.name != vars.get(&quot;app_specific_username&quot;)) {
                   <hashTree/>
                 </hashTree>
                 <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Search for risks" enabled="true">
-                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+                  <stringProp name="HTTPSampler.path">${application.postfix}/rest/api/2/search</stringProp>
+                  <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                  <stringProp name="HTTPSampler.method">GET</stringProp>
+                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                  <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+                  <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
                     <collectionProp name="Arguments.arguments">
                       <elementProp name="jql" elementType="HTTPArgument">
                         <boolProp name="HTTPArgument.always_encode">true</boolProp>
@@ -8296,19 +8165,6 @@ if (response_data.name != vars.get(&quot;app_specific_username&quot;)) {
                       </elementProp>
                     </collectionProp>
                   </elementProp>
-                  <stringProp name="HTTPSampler.domain"></stringProp>
-                  <stringProp name="HTTPSampler.port"></stringProp>
-                  <stringProp name="HTTPSampler.protocol"></stringProp>
-                  <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-                  <stringProp name="HTTPSampler.path">${application.postfix}/rest/api/2/search</stringProp>
-                  <stringProp name="HTTPSampler.method">GET</stringProp>
-                  <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-                  <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-                  <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                  <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-                  <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-                  <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-                  <stringProp name="HTTPSampler.response_timeout"></stringProp>
                 </HTTPSamplerProxy>
                 <hashTree>
                   <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
@@ -8520,7 +8376,7 @@ if ( sleep_time &gt; 0 ) {
           <hashTree/>
         </hashTree>
       </hashTree>
-      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="false">
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
           <name>saveConfig</name>

@@ -60,7 +60,7 @@ def app_specific_action(webdriver, datasets):
             set_impact(issue_page)
             set_probab(issue_page)
             issue_page.edit_issue_submit()
-            issue_page.wait_for_issue_title()
+            issue_page.wait_for_issue_loaded()
 
         @print_timing("selenium_app_custom_action:view_risk_register")
         def view_risk_register():
