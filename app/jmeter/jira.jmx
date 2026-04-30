@@ -7631,7 +7631,6 @@ prev.setIgnore()</stringProp>
                     <stringProp name="script">vars.put(&quot;run_as_specific_user&quot;, &quot;true&quot;)
 prev.setIgnore()</stringProp>
                   </JSR223PostProcessor>
-                  <hashTree/>
                 </hashTree>
               </hashTree>
               <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="check_logged_in_as_specific_user">
@@ -7863,6 +7862,7 @@ prev.setIgnore()</stringProp>
                   <intProp name="Assertion.test_type">16</intProp>
                 </ResponseAssertion>
                 <hashTree/>
+              </hashTree>
               <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="jmeter_app_specific_action:view_risk" enabled="true">
                 <boolProp name="TransactionController.parent">true</boolProp>
                 <boolProp name="TransactionController.includeTimers">false</boolProp>
