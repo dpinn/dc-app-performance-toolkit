@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
   <hashTree>
-    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan">
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
       <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
-      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
         <collectionProp name="Arguments.arguments"/>
       </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
     </TestPlan>
     <hashTree>
       <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="Global Variables">
@@ -161,23 +165,23 @@
         </elementProp>
       </SetupThreadGroup>
       <hashTree>
-        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="page count">
+        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="page count" enabled="true">
           <intProp name="ActionProcessor.action">1</intProp>
           <intProp name="ActionProcessor.target">0</intProp>
           <stringProp name="ActionProcessor.duration">0</stringProp>
         </TestAction>
         <hashTree>
-          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="get count projects page">
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="get count projects page" enabled="true">
             <boolProp name="resetInterpreter">false</boolProp>
             <stringProp name="parameters"></stringProp>
             <stringProp name="filename"></stringProp>
             <stringProp name="script">import org.apache.commons.io.FileUtils;
 
-              // TODO Rework hard-codded path
-              int projects = FileUtils.readLines(new File(&quot;datasets/jira/projects.csv&quot;)).size();
-              int page_size = 25;
-              int pages = (projects % page_size == 0) ? projects / page_size : projects / page_size + 1;
-              props.put(&quot;project_pages&quot;, String.valueOf(pages));</stringProp>
+// TODO Rework hard-codded path
+int projects = FileUtils.readLines(new File(&quot;datasets/jira/projects.csv&quot;)).size();
+int page_size = 25;
+int pages = (projects % page_size == 0) ? projects / page_size : projects / page_size + 1;
+props.put(&quot;project_pages&quot;, String.valueOf(pages));</stringProp>
           </BeanShellPreProcessor>
           <hashTree/>
         </hashTree>
@@ -342,7 +346,7 @@
           </hashTree>
         </hashTree>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Jira">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Jira" enabled="true">
         <intProp name="ThreadGroup.num_threads">1</intProp>
         <intProp name="ThreadGroup.ramp_time">0</intProp>
         <longProp name="ThreadGroup.duration">0</longProp>
@@ -541,13 +545,13 @@ if (&quot;NOT_FOUND&quot;.equals(loginform)) {
             </JSR223PostProcessor>
             <hashTree/>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If legacy login flow">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If legacy login flow" enabled="true">
             <stringProp name="IfController.condition">${__groovy(vars.get(&quot;legacy_login_form&quot;) == &apos;true&apos;)}</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
             <boolProp name="IfController.useExpression">true</boolProp>
           </IfController>
           <hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="100 /login.jsp">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="100 /login.jsp" enabled="true">
               <stringProp name="TestPlan.comments">Detected the start of a redirect chain</stringProp>
               <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
               <stringProp name="HTTPSampler.path">${application.postfix}/login.jsp</stringProp>
@@ -7431,7 +7435,7 @@ if ( sleep_time &gt; 0 ) {
               <hashTree/>
             </hashTree>
           </hashTree>
-          <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="standalone_extension">
+          <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="standalone_extension" enabled="true">
             <intProp name="ThroughputController.style">1</intProp>
             <boolProp name="ThroughputController.perThread">false</boolProp>
             <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -7456,7 +7460,7 @@ if ( sleep_time &gt; 0 ) {
             </hashTree>
             <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="login_as_specific_user" enabled="true"/>
             <hashTree>
-              <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="username:password">
+              <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="username:password" enabled="true">
                 <collectionProp name="Arguments.arguments">
                   <elementProp name="app_specific_username" elementType="Argument">
                     <stringProp name="Argument.name">app_specific_username</stringProp>
@@ -7471,13 +7475,13 @@ if ( sleep_time &gt; 0 ) {
                 </collectionProp>
               </Arguments>
               <hashTree/>
-              <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If legacy login flow">
+              <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If legacy login flow" enabled="true">
                 <stringProp name="IfController.condition">${__groovy(vars.get(&quot;legacy_login_form&quot;) == &apos;true&apos;)}</stringProp>
                 <boolProp name="IfController.evaluateAll">false</boolProp>
                 <boolProp name="IfController.useExpression">true</boolProp>
               </IfController>
               <hashTree>
-                <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="login_as_specific_user">
+                <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="login_as_specific_user" enabled="true">
                   <stringProp name="TestPlan.comments">Detected the start of a redirect chain</stringProp>
                   <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
                   <stringProp name="HTTPSampler.path">${application.postfix}/login.jsp</stringProp>
@@ -7566,7 +7570,7 @@ if ( sleep_time &gt; 0 ) {
                     </collectionProp>
                   </HeaderManager>
                   <hashTree/>
-                  <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="ignore_request_result_from_view">
+                  <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="ignore_request_result_from_view" enabled="true">
                     <stringProp name="scriptLanguage">groovy</stringProp>
                     <stringProp name="parameters"></stringProp>
                     <stringProp name="filename"></stringProp>
@@ -7577,13 +7581,13 @@ prev.setIgnore()</stringProp>
                   <hashTree/>
                 </hashTree>
               </hashTree>
-              <IfController guiclass="IfControllerPanel" testclass="IfController" testname="if 2sv login flow">
+              <IfController guiclass="IfControllerPanel" testclass="IfController" testname="if 2sv login flow" enabled="true">
                 <stringProp name="IfController.condition">${__groovy(vars.get(&quot;legacy_login_form&quot;) == &apos;false&apos;)}</stringProp>
                 <boolProp name="IfController.evaluateAll">false</boolProp>
                 <boolProp name="IfController.useExpression">true</boolProp>
               </IfController>
               <hashTree>
-                <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="15 /rest/tsv/1.0/authenticate">
+                <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="15 /rest/tsv/1.0/authenticate" enabled="true">
                   <stringProp name="TestPlan.comments">2sv login flow</stringProp>
                   <stringProp name="HTTPSampler.path">${application.postfix}/rest/tsv/1.0/authenticate</stringProp>
                   <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -7613,7 +7617,7 @@ prev.setIgnore()</stringProp>
                     </collectionProp>
                   </HeaderManager>
                   <hashTree/>
-                  <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion">
+                  <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
                     <collectionProp name="Asserion.test_strings">
                       <stringProp name="49586">200</stringProp>
                     </collectionProp>
@@ -7623,7 +7627,7 @@ prev.setIgnore()</stringProp>
                     <intProp name="Assertion.test_type">2</intProp>
                   </ResponseAssertion>
                   <hashTree/>
-                  <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="ignore_request_result_from_view">
+                  <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="ignore_request_result_from_view" enabled="true">
                     <stringProp name="scriptLanguage">groovy</stringProp>
                     <stringProp name="parameters"></stringProp>
                     <stringProp name="filename"></stringProp>
@@ -7631,9 +7635,10 @@ prev.setIgnore()</stringProp>
                     <stringProp name="script">vars.put(&quot;run_as_specific_user&quot;, &quot;true&quot;)
 prev.setIgnore()</stringProp>
                   </JSR223PostProcessor>
+                  <hashTree/>
                 </hashTree>
               </hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="check_logged_in_as_specific_user">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="check_logged_in_as_specific_user" enabled="true">
                 <stringProp name="HTTPSampler.path">${application.postfix}/rest/api/2/myself</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -7644,7 +7649,7 @@ prev.setIgnore()</stringProp>
                 </elementProp>
               </HTTPSamplerProxy>
               <hashTree>
-                <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="check_current_user">
+                <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="check_current_user" enabled="true">
                   <stringProp name="scriptLanguage">groovy</stringProp>
                   <stringProp name="parameters"></stringProp>
                   <stringProp name="filename"></stringProp>
@@ -7666,7 +7671,7 @@ if (response_data.name != vars.get(&quot;app_specific_username&quot;)) {
                 </JSR223PostProcessor>
                 <hashTree/>
               </hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="update_tokens_as_app_specific_user">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="update_tokens_as_app_specific_user" enabled="true">
                 <stringProp name="HTTPSampler.path">${application.postfix}/</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -7698,7 +7703,7 @@ if (response_data.name != vars.get(&quot;app_specific_username&quot;)) {
                   </collectionProp>
                 </HeaderManager>
                 <hashTree/>
-                <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="x-atl-token">
+                <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="x-atl-token" enabled="true">
                   <stringProp name="RegexExtractor.useHeaders">false</stringProp>
                   <stringProp name="RegexExtractor.refname">x-atl-token</stringProp>
                   <stringProp name="RegexExtractor.regex">name=&quot;atlassian-token&quot; content=&quot;(.+?)&quot;</stringProp>
@@ -7709,7 +7714,7 @@ if (response_data.name != vars.get(&quot;app_specific_username&quot;)) {
                   <boolProp name="RegexExtractor.default_empty_value">true</boolProp>
                 </RegexExtractor>
                 <hashTree/>
-                <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Logger">
+                <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Logger" enabled="true">
                   <stringProp name="scriptLanguage">groovy</stringProp>
                   <stringProp name="parameters"></stringProp>
                   <stringProp name="filename"></stringProp>
@@ -7760,7 +7765,7 @@ prev.setIgnore()</stringProp>
                 </elementProp>
               </HTTPSamplerProxy>
               <hashTree>
-                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
+                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
                   <collectionProp name="HeaderManager.headers">
                     <elementProp name="" elementType="Header">
                       <stringProp name="Header.name">X-Atlassian-Token</stringProp>
@@ -7769,7 +7774,7 @@ prev.setIgnore()</stringProp>
                   </collectionProp>
                 </HeaderManager>
                 <hashTree/>
-                <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Logger">
+                <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Logger" enabled="true">
                   <stringProp name="scriptLanguage">groovy</stringProp>
                   <stringProp name="parameters"></stringProp>
                   <stringProp name="filename"></stringProp>
@@ -7779,91 +7784,12 @@ prev.setIgnore()</stringProp>
                 <hashTree/>
               </hashTree>
             </hashTree>
-            <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="jmeter_app_specific_action">
+            <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="jmeter_app_specific_action" enabled="true">
               <boolProp name="TransactionController.parent">true</boolProp>
               <boolProp name="TransactionController.includeTimers">false</boolProp>
             </TransactionController>
             <hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="GET /app/get_endpoint">
-                <stringProp name="HTTPSampler.path">${application.postfix}/app/get_endpoint</stringProp>
-                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-                <stringProp name="HTTPSampler.method">GET</stringProp>
-                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
-                <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
-                  <collectionProp name="Arguments.arguments"/>
-                </elementProp>
-              </HTTPSamplerProxy>
-              <hashTree>
-                <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="app_id">
-                  <stringProp name="RegexExtractor.useHeaders">false</stringProp>
-                  <stringProp name="RegexExtractor.refname">app_id</stringProp>
-                  <stringProp name="RegexExtractor.regex">&quot;id&quot;:&quot;(.+?)&quot;</stringProp>
-                  <stringProp name="RegexExtractor.template">$1$</stringProp>
-                  <stringProp name="RegexExtractor.default">NOT FOUND</stringProp>
-                  <stringProp name="RegexExtractor.match_number">1</stringProp>
-                  <boolProp name="RegexExtractor.default_empty_value">false</boolProp>
-                </RegexExtractor>
-                <hashTree/>
-                <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="app_token">
-                  <stringProp name="RegexExtractor.useHeaders">false</stringProp>
-                  <stringProp name="RegexExtractor.refname">app_token</stringProp>
-                  <stringProp name="RegexExtractor.regex">&quot;token&quot;:&quot;(.+?)&quot;</stringProp>
-                  <stringProp name="RegexExtractor.template">$1$</stringProp>
-                  <stringProp name="RegexExtractor.default">NOT FOUND</stringProp>
-                  <stringProp name="RegexExtractor.match_number">1</stringProp>
-                  <boolProp name="RegexExtractor.default_empty_value">false</boolProp>
-                </RegexExtractor>
-                <hashTree/>
-                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="assertion after GET request" enabled="true">
-                  <collectionProp name="Asserion.test_strings">
-                    <stringProp name="261585815">asserttion string</stringProp>
-                  </collectionProp>
-                  <stringProp name="Assertion.custom_message"></stringProp>
-                  <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
-                  <boolProp name="Assertion.assume_success">false</boolProp>
-                  <intProp name="Assertion.test_type">16</intProp>
-                </ResponseAssertion>
-                <hashTree/>
-              </hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="POST /app/post_endpoint">
-                <stringProp name="HTTPSampler.path">${application.postfix}/app/post_endpoint</stringProp>
-                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-                <stringProp name="HTTPSampler.method">POST</stringProp>
-                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-                <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
-                <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
-                  <collectionProp name="Arguments.arguments">
-                    <elementProp name="id" elementType="HTTPArgument">
-                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                      <stringProp name="Argument.value">${app_id}</stringProp>
-                      <stringProp name="Argument.metadata">=</stringProp>
-                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                      <stringProp name="Argument.name">id</stringProp>
-                    </elementProp>
-                    <elementProp name="token" elementType="HTTPArgument">
-                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                      <stringProp name="Argument.value">${app_token}</stringProp>
-                      <stringProp name="Argument.metadata">=</stringProp>
-                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                      <stringProp name="Argument.name">token</stringProp>
-                    </elementProp>
-                  </collectionProp>
-                </elementProp>
-              </HTTPSamplerProxy>
-              <hashTree>
-                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="assertion after POST request" enabled="true">
-                  <collectionProp name="Asserion.test_strings">
-                    <stringProp name="-787535121">assertion string</stringProp>
-                  </collectionProp>
-                  <stringProp name="Assertion.custom_message"></stringProp>
-                  <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
-                  <boolProp name="Assertion.assume_success">false</boolProp>
-                  <intProp name="Assertion.test_type">16</intProp>
-                </ResponseAssertion>
-                <hashTree/>
-              </hashTree>
-              <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="jmeter_app_specific_action:view_risk" enabled="true">
+              <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="jmeter_app_specific_action:view_risk">
                 <boolProp name="TransactionController.parent">true</boolProp>
                 <boolProp name="TransactionController.includeTimers">false</boolProp>
               </TransactionController>
@@ -7965,7 +7891,7 @@ prev.setIgnore()</stringProp>
                   <hashTree/>
                 </hashTree>
               </hashTree>
-              <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="jmeter_app_specific_action:view_risk_register" enabled="true">
+              <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="jmeter_app_specific_action:view_risk_register">
                 <intProp name="ThroughputController.style">1</intProp>
                 <boolProp name="ThroughputController.perThread">false</boolProp>
                 <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -8201,7 +8127,7 @@ prev.setIgnore()</stringProp>
                   <hashTree/>
                 </hashTree>
               </hashTree>
-              <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="jmeter_app_specific_action:view_risk_matrix" enabled="true">
+              <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="jmeter_app_specific_action:view_risk_matrix">
                 <intProp name="ThroughputController.style">1</intProp>
                 <boolProp name="ThroughputController.perThread">false</boolProp>
                 <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -8401,13 +8327,13 @@ prev.setIgnore()</stringProp>
               <boolProp name="IfController.useExpression">true</boolProp>
             </IfController>
             <hashTree>
-              <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If legacy login flow">
+              <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If legacy login flow" enabled="true">
                 <stringProp name="IfController.condition">${__groovy(vars.get(&quot;legacy_login_form&quot;) == &apos;true&apos;)}</stringProp>
                 <boolProp name="IfController.evaluateAll">false</boolProp>
                 <boolProp name="IfController.useExpression">true</boolProp>
               </IfController>
               <hashTree>
-                <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="login_as_specific_user">
+                <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="login_as_specific_user" enabled="true">
                   <stringProp name="TestPlan.comments">Detected the start of a redirect chain</stringProp>
                   <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
                   <stringProp name="HTTPSampler.path">${application.postfix}/login.jsp</stringProp>
@@ -8496,7 +8422,7 @@ prev.setIgnore()</stringProp>
                     </collectionProp>
                   </HeaderManager>
                   <hashTree/>
-                  <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="ignore_request_result_from_view">
+                  <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="ignore_request_result_from_view" enabled="true">
                     <stringProp name="scriptLanguage">groovy</stringProp>
                     <stringProp name="parameters"></stringProp>
                     <stringProp name="filename"></stringProp>
@@ -8506,13 +8432,13 @@ prev.setIgnore()</stringProp>
                   <hashTree/>
                 </hashTree>
               </hashTree>
-              <IfController guiclass="IfControllerPanel" testclass="IfController" testname="if 2sv login flow">
+              <IfController guiclass="IfControllerPanel" testclass="IfController" testname="if 2sv login flow" enabled="true">
                 <stringProp name="IfController.condition">${__groovy(vars.get(&quot;legacy_login_form&quot;) == &apos;false&apos;)}</stringProp>
                 <boolProp name="IfController.evaluateAll">false</boolProp>
                 <boolProp name="IfController.useExpression">true</boolProp>
               </IfController>
               <hashTree>
-                <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="15 /rest/tsv/1.0/authenticate">
+                <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="15 /rest/tsv/1.0/authenticate" enabled="true">
                   <stringProp name="TestPlan.comments">2sv login flow</stringProp>
                   <stringProp name="HTTPSampler.path">${application.postfix}/rest/tsv/1.0/authenticate</stringProp>
                   <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -8542,7 +8468,7 @@ prev.setIgnore()</stringProp>
                     </collectionProp>
                   </HeaderManager>
                   <hashTree/>
-                  <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion">
+                  <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
                     <collectionProp name="Asserion.test_strings">
                       <stringProp name="49586">200</stringProp>
                     </collectionProp>
@@ -8552,7 +8478,7 @@ prev.setIgnore()</stringProp>
                     <intProp name="Assertion.test_type">2</intProp>
                   </ResponseAssertion>
                   <hashTree/>
-                  <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="ignore_request_result_from_view">
+                  <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="ignore_request_result_from_view" enabled="true">
                     <stringProp name="scriptLanguage">groovy</stringProp>
                     <stringProp name="parameters"></stringProp>
                     <stringProp name="filename"></stringProp>
@@ -8562,7 +8488,7 @@ prev.setIgnore()</stringProp>
                   <hashTree/>
                 </hashTree>
               </hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="check_logged_in_as_default_user">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="check_logged_in_as_default_user" enabled="true">
                 <stringProp name="HTTPSampler.path">${application.postfix}/rest/api/2/myself</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -8573,7 +8499,7 @@ prev.setIgnore()</stringProp>
                 </elementProp>
               </HTTPSamplerProxy>
               <hashTree>
-                <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="check_current_user">
+                <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="check_current_user" enabled="true">
                   <stringProp name="scriptLanguage">groovy</stringProp>
                   <stringProp name="parameters"></stringProp>
                   <stringProp name="filename"></stringProp>
@@ -8597,7 +8523,7 @@ if (response_data.name != vars.get(&quot;username&quot;)) {
                 </JSR223PostProcessor>
                 <hashTree/>
               </hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="update_tokens_as_app_specific_user">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="update_tokens_as_app_specific_user" enabled="true">
                 <stringProp name="HTTPSampler.path">${application.postfix}/</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -8640,7 +8566,7 @@ if (response_data.name != vars.get(&quot;username&quot;)) {
                   <boolProp name="RegexExtractor.default_empty_value">true</boolProp>
                 </RegexExtractor>
                 <hashTree/>
-                <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Logger">
+                <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Logger" enabled="true">
                   <stringProp name="scriptLanguage">groovy</stringProp>
                   <stringProp name="parameters"></stringProp>
                   <stringProp name="filename"></stringProp>
@@ -8651,13 +8577,13 @@ prev.setIgnore()</stringProp>
                 <hashTree/>
               </hashTree>
             </hashTree>
-            <TestAction guiclass="TestActionGui" testclass="TestAction" testname="pacing - end">
+            <TestAction guiclass="TestActionGui" testclass="TestAction" testname="pacing - end" enabled="true">
               <intProp name="ActionProcessor.action">1</intProp>
               <intProp name="ActionProcessor.target">0</intProp>
               <stringProp name="ActionProcessor.duration">0</stringProp>
             </TestAction>
             <hashTree>
-              <JSR223Timer guiclass="TestBeanGUI" testclass="JSR223Timer" testname="pacing timer">
+              <JSR223Timer guiclass="TestBeanGUI" testclass="JSR223Timer" testname="pacing timer" enabled="true">
                 <stringProp name="cacheKey">true</stringProp>
                 <stringProp name="filename"></stringProp>
                 <stringProp name="parameters"></stringProp>
