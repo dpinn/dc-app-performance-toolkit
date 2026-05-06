@@ -1,10 +1,10 @@
 import random
 
 from selenium.webdriver.common.by import By
+
 from selenium_ui.base_page import BasePage
 from selenium_ui.conftest import print_timing
-from selenium_ui.jira.pages.pages import Login, AdminPage, Issue
-
+from selenium_ui.jira.pages.pages import Issue
 from util.api.jira_clients import JiraRestClient
 from util.conf import JIRA_SETTINGS
 

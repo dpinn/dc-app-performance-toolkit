@@ -13,13 +13,13 @@
 # This value can not be altered after the configuration has been applied.
 # Only lowercase letters, numbers, dashes, and dots are allowed.
 # ! REQUIRED !
-environment_name = "dcapt-product-small"
+environment_name = "dcapt-jira-small"
 
 # Supported products: jira, confluence and bitbucket.
 # For JSM set product as jira.
 # e.g.: products = ["jira"]
 # ! REQUIRED !
-products = ["product-to-deploy"]
+products = ["jira"]
 
 # License
 # To avoid storing license in a plain text file, we recommend storing it in an environment variable prefixed with `TF_VAR_` (i.e. `TF_VAR_jira_license`) and keep the below line commented out
@@ -35,7 +35,7 @@ bitbucket_license = "bitbucket-license"
 # You can also provide a subdomain <subdomain.domain.com> and the final ingress domain will be <environment.subdomain.domain.com>.
 # When commented out, the ingress controller is not provisioned and the application is accessible over HTTP protocol (not HTTPS).
 #
-#domain = "<example.com>"
+domain = "dc.projectbalm.com"
 
 ################################################################################
 # Common Settings
@@ -89,7 +89,7 @@ jira_image_repository = "atlassian/jira-software"
 
 # Supported versions by DCAPT: https://github.com/atlassian/dc-app-performance-toolkit#supported-versions
 # Jira version.
-jira_version_tag = "11.3.1"
+jira_version_tag = "11.3.4"
 # JSM version
 # ! REQUIRED for JSM !
 # jira_version_tag = "11.3.1"

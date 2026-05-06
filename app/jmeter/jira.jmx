@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
   <hashTree>
-    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
-      <stringProp name="TestPlan.comments"></stringProp>
-      <boolProp name="TestPlan.functional_mode">false</boolProp>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan">
       <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
-      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
-      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
         <collectionProp name="Arguments.arguments"/>
       </elementProp>
-      <stringProp name="TestPlan.user_define_classpath"></stringProp>
     </TestPlan>
     <hashTree>
       <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="Global Variables">
@@ -37,36 +33,36 @@
         </collectionProp>
       </Arguments>
       <hashTree/>
-      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="Risk Register variables" enabled="true">
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="Risk Register variables">
         <collectionProp name="Arguments.arguments">
           <elementProp name="cfInherentImpact" elementType="Argument">
             <stringProp name="Argument.name">cfInherentImpact</stringProp>
-            <stringProp name="Argument.value">11100</stringProp>
+            <stringProp name="Argument.value">10200</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="cfInherentProbab" elementType="Argument">
             <stringProp name="Argument.name">cfInherentProbab</stringProp>
-            <stringProp name="Argument.value">11101</stringProp>
+            <stringProp name="Argument.value">10201</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="cfResidualImpact" elementType="Argument">
             <stringProp name="Argument.name">cfResidualImpact</stringProp>
-            <stringProp name="Argument.value">11102</stringProp>
+            <stringProp name="Argument.value">10202</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="cfResidualProbab" elementType="Argument">
             <stringProp name="Argument.name">cfResidualProbab</stringProp>
-            <stringProp name="Argument.value">11103</stringProp>
+            <stringProp name="Argument.value">10203</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="cfTreatment" elementType="Argument">
             <stringProp name="Argument.name">cfTreatment</stringProp>
-            <stringProp name="Argument.value">11108</stringProp>
+            <stringProp name="Argument.value">10209</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="riskIssueTypeId" elementType="Argument">
             <stringProp name="Argument.name">riskIssueTypeId</stringProp>
-            <stringProp name="Argument.value">10400</stringProp>
+            <stringProp name="Argument.value">10200</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="statusClosed" elementType="Argument">
@@ -76,18 +72,18 @@
           </elementProp>
           <elementProp name="cfImpactHigh" elementType="Argument">
             <stringProp name="Argument.name">cfImpactHigh</stringProp>
-            <stringProp name="Argument.value">11207</stringProp>
+            <stringProp name="Argument.value">10007</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="cfProbabLikely" elementType="Argument">
             <stringProp name="Argument.name">cfProbabLikely</stringProp>
-            <stringProp name="Argument.value">11218</stringProp>
+            <stringProp name="Argument.value">10018</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
       </Arguments>
       <hashTree/>
-      <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
+      <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults">
         <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
         <intProp name="HTTPSampler.concurrentPool">6</intProp>
         <stringProp name="HTTPSampler.embedded_url_re">(?i).*${application.hostname}.*</stringProp>
@@ -103,13 +99,13 @@
         <stringProp name="HTTPSampler.implementation"></stringProp>
       </ConfigTestElement>
       <hashTree/>
-      <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
+      <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager">
         <collectionProp name="CookieManager.cookies"/>
         <boolProp name="CookieManager.clearEachIteration">true</boolProp>
         <boolProp name="CookieManager.controlledByThreadGroup">false</boolProp>
       </CookieManager>
       <hashTree/>
-      <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+      <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
         <collectionProp name="HeaderManager.headers">
           <elementProp name="" elementType="Header">
             <stringProp name="Header.name">Origin</stringProp>
@@ -154,7 +150,7 @@
         <stringProp name="filename"></stringProp>
       </ResultCollector>
       <hashTree/>
-      <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="setUp Thread Group" enabled="true">
+      <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="setUp Thread Group" enabled="false">
         <intProp name="ThreadGroup.num_threads">1</intProp>
         <intProp name="ThreadGroup.ramp_time">1</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
@@ -165,13 +161,13 @@
         </elementProp>
       </SetupThreadGroup>
       <hashTree>
-        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="page count" enabled="true">
+        <TestAction guiclass="TestActionGui" testclass="TestAction" testname="page count">
           <intProp name="ActionProcessor.action">1</intProp>
           <intProp name="ActionProcessor.target">0</intProp>
           <stringProp name="ActionProcessor.duration">0</stringProp>
         </TestAction>
         <hashTree>
-          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="get count projects page" enabled="true">
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="get count projects page">
             <boolProp name="resetInterpreter">false</boolProp>
             <stringProp name="parameters"></stringProp>
             <stringProp name="filename"></stringProp>
@@ -185,16 +181,16 @@ props.put(&quot;project_pages&quot;, String.valueOf(pages));</stringProp>
           </BeanShellPreProcessor>
           <hashTree/>
         </hashTree>
-        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="One-time set-up for Risk Register" enabled="false">
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="One-time set-up for Risk Register">
           <boolProp name="TransactionController.includeTimers">false</boolProp>
         </TransactionController>
         <hashTree>
-          <AuthManager guiclass="AuthPanel" testclass="AuthManager" testname="HTTP Authorization Manager" enabled="true">
+          <AuthManager guiclass="AuthPanel" testclass="AuthManager" testname="HTTP Authorization Manager">
             <collectionProp name="AuthManager.auth_list">
               <elementProp name="" elementType="Authorization">
                 <stringProp name="Authorization.url">${application.protocol}://${application.hostname}</stringProp>
                 <stringProp name="Authorization.username">admin</stringProp>
-                <stringProp name="Authorization.password">TnzfJBHGHElT88Xi</stringProp>
+                <stringProp name="Authorization.password">admin</stringProp>
                 <stringProp name="Authorization.domain"></stringProp>
                 <stringProp name="Authorization.realm"></stringProp>
                 <stringProp name="Authorization.mechanism">BASIC_DIGEST</stringProp>
@@ -204,7 +200,7 @@ props.put(&quot;project_pages&quot;, String.valueOf(pages));</stringProp>
             <boolProp name="AuthManager.controlledByThreadGroup">false</boolProp>
           </AuthManager>
           <hashTree/>
-          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager">
             <collectionProp name="HeaderManager.headers">
               <elementProp name="Accept-Language" elementType="Header">
                 <stringProp name="Header.name">Accept-Language</stringProp>
@@ -229,12 +225,12 @@ props.put(&quot;project_pages&quot;, String.valueOf(pages));</stringProp>
             </collectionProp>
           </HeaderManager>
           <hashTree/>
-          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Turn all projects into Risk Registers" enabled="true">
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Turn all projects into Risk Registers">
             <boolProp name="TransactionController.parent">true</boolProp>
             <boolProp name="TransactionController.includeTimers">false</boolProp>
           </TransactionController>
           <hashTree>
-            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get all projects" enabled="true">
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get all projects">
               <stringProp name="HTTPSampler.path">${application.postfix}/rest/api/2/project</stringProp>
               <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
               <stringProp name="HTTPSampler.method">GET</stringProp>
@@ -245,20 +241,20 @@ props.put(&quot;project_pages&quot;, String.valueOf(pages));</stringProp>
               </elementProp>
             </HTTPSamplerProxy>
             <hashTree>
-              <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Extract project ids" enabled="true">
+              <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Extract project ids">
                 <stringProp name="JSONPostProcessor.referenceNames">project_id</stringProp>
                 <stringProp name="JSONPostProcessor.jsonPathExprs">$[*].id</stringProp>
                 <stringProp name="JSONPostProcessor.match_numbers">-1</stringProp>
               </JSONPostProcessor>
               <hashTree/>
             </hashTree>
-            <ForeachController guiclass="ForeachControlPanel" testclass="ForeachController" testname="ForEach project" enabled="true">
+            <ForeachController guiclass="ForeachControlPanel" testclass="ForeachController" testname="ForEach project">
               <stringProp name="ForeachController.inputVal">project_id</stringProp>
               <stringProp name="ForeachController.returnVal">pid</stringProp>
               <boolProp name="ForeachController.useSeparator">true</boolProp>
             </ForeachController>
             <hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Make project a risk register" enabled="true">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Make project a risk register">
                 <stringProp name="HTTPSampler.path">${application.postfix}/rest/projectbalm/riskregister/latest/registers</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -277,17 +273,17 @@ props.put(&quot;project_pages&quot;, String.valueOf(pages));</stringProp>
               <hashTree/>
             </hashTree>
           </hashTree>
-          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Create a bunch of AppIssue issues" enabled="true">
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Create a bunch of AppIssue issues">
             <boolProp name="TransactionController.parent">true</boolProp>
             <boolProp name="TransactionController.includeTimers">false</boolProp>
           </TransactionController>
           <hashTree>
-            <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Create 200 risks in ABC project" enabled="true">
+            <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Create 200 risks in ABC project">
               <boolProp name="LoopController.continue_forever">true</boolProp>
               <stringProp name="LoopController.loops">200</stringProp>
             </LoopController>
             <hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Create risk" enabled="true">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Create risk">
                 <stringProp name="HTTPSampler.path">${application.postfix}/rest/api/2/issue</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">POST</stringProp>
@@ -319,7 +315,7 @@ props.put(&quot;project_pages&quot;, String.valueOf(pages));</stringProp>
                 </JSONPostProcessor>
                 <hashTree/>
               </hashTree>
-              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Add risk assessment" enabled="true">
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Add risk assessment">
                 <stringProp name="HTTPSampler.path">${application.postfix}/rest/projectbalm/riskregister/latest/issue/${issue_key}/assessment</stringProp>
                 <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
                 <stringProp name="HTTPSampler.method">PUT</stringProp>
@@ -346,7 +342,7 @@ props.put(&quot;project_pages&quot;, String.valueOf(pages));</stringProp>
           </hashTree>
         </hashTree>
       </hashTree>
-      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Jira" enabled="true">
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Jira">
         <intProp name="ThreadGroup.num_threads">1</intProp>
         <intProp name="ThreadGroup.ramp_time">0</intProp>
         <longProp name="ThreadGroup.duration">0</longProp>
@@ -358,7 +354,7 @@ props.put(&quot;project_pages&quot;, String.valueOf(pages));</stringProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
-        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="users" enabled="true">
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="users">
           <stringProp name="filename">datasets/jira/users.csv</stringProp>
           <stringProp name="fileEncoding"></stringProp>
           <stringProp name="variableNames">username,password</stringProp>
@@ -370,7 +366,7 @@ props.put(&quot;project_pages&quot;, String.valueOf(pages));</stringProp>
           <stringProp name="shareMode">shareMode.all</stringProp>
         </CSVDataSet>
         <hashTree/>
-        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="load profile" enabled="true">
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="load profile">
           <collectionProp name="Arguments.arguments">
             <elementProp name="total_actions_per_hr" elementType="Argument">
               <stringProp name="Argument.name">total_actions_per_hr</stringProp>
@@ -445,7 +441,7 @@ props.put(&quot;project_pages&quot;, String.valueOf(pages));</stringProp>
           </collectionProp>
         </Arguments>
         <hashTree/>
-        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="jmeter_login_and_view_dashboard" enabled="true">
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="jmeter_login_and_view_dashboard">
           <boolProp name="TransactionController.parent">true</boolProp>
           <boolProp name="TransactionController.includeTimers">false</boolProp>
         </TransactionController>
@@ -7789,7 +7785,7 @@ prev.setIgnore()</stringProp>
               <boolProp name="TransactionController.includeTimers">false</boolProp>
             </TransactionController>
             <hashTree>
-              <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="jmeter_app_specific_action:view_risk">
+              <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="jmeter_app_specific_action:view_risk" enabled="true">
                 <boolProp name="TransactionController.parent">true</boolProp>
                 <boolProp name="TransactionController.includeTimers">false</boolProp>
               </TransactionController>
@@ -7891,7 +7887,7 @@ prev.setIgnore()</stringProp>
                   <hashTree/>
                 </hashTree>
               </hashTree>
-              <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="jmeter_app_specific_action:view_risk_register">
+              <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="jmeter_app_specific_action:view_risk_register" enabled="true">
                 <intProp name="ThroughputController.style">1</intProp>
                 <boolProp name="ThroughputController.perThread">false</boolProp>
                 <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -8127,7 +8123,7 @@ prev.setIgnore()</stringProp>
                   <hashTree/>
                 </hashTree>
               </hashTree>
-              <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="jmeter_app_specific_action:view_risk_matrix">
+              <ThroughputController guiclass="ThroughputControllerGui" testclass="ThroughputController" testname="jmeter_app_specific_action:view_risk_matrix" enabled="true">
                 <intProp name="ThroughputController.style">1</intProp>
                 <boolProp name="ThroughputController.perThread">false</boolProp>
                 <intProp name="ThroughputController.maxThroughput">1</intProp>
@@ -8321,7 +8317,7 @@ prev.setIgnore()</stringProp>
                 </hashTree>
               </hashTree>
             </hashTree>
-            <IfController guiclass="IfControllerPanel" testclass="IfController" testname="login_as_default_user_if_specific_user_was_loggedin ">
+            <IfController guiclass="IfControllerPanel" testclass="IfController" testname="login_as_default_user_if_specific_user_was_loggedin " enabled="true">
               <stringProp name="IfController.condition">${run_as_specific_user}</stringProp>
               <boolProp name="IfController.evaluateAll">false</boolProp>
               <boolProp name="IfController.useExpression">true</boolProp>
@@ -8619,7 +8615,7 @@ if ( sleep_time &gt; 0 ) {
           <hashTree/>
         </hashTree>
       </hashTree>
-      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
           <name>saveConfig</name>
