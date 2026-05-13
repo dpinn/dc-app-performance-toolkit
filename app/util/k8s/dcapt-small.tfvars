@@ -35,7 +35,7 @@ bitbucket_license = "bitbucket-license"
 # You can also provide a subdomain <subdomain.domain.com> and the final ingress domain will be <environment.subdomain.domain.com>.
 # When commented out, the ingress controller is not provisioned and the application is accessible over HTTP protocol (not HTTPS).
 #
-domain = "dc.projectbalm.com"
+#domain = "<example.com>"
 
 ################################################################################
 # Common Settings
@@ -89,7 +89,7 @@ jira_image_repository = "atlassian/jira-software"
 
 # Supported versions by DCAPT: https://github.com/atlassian/dc-app-performance-toolkit#supported-versions
 # Jira version.
-jira_version_tag = "11.3.4"
+jira_version_tag = "11.3.1"
 # JSM version
 # ! REQUIRED for JSM !
 # jira_version_tag = "11.3.1"

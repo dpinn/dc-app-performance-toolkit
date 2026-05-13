@@ -5,7 +5,7 @@ settings:
   verbose: false
   check-updates: false                 # disable bzt check for updates
   env:
-    application_hostname: dc.projectbalm.com    # Jira DC hostname without protocol and port e.g. test-jira.atlassian.com or localhost
+    application_hostname: af18769ab294449668e1b0770ad7b8dd-47924628.us-east-2.elb.amazonaws.com    # Jira DC hostname without protocol and port e.g. test-jira.atlassian.com or localhost
     application_protocol: http      # http or https
     application_port: 80            # 80, 443, 8080, 2990, etc
     secure: False                   # Set False to allow insecure connections, e.g. when using self-signed SSL certificate
@@ -120,7 +120,8 @@ modules:
       httpsampler.ignore_failed_embedded_resources: "true"
   selenium:
     chromedriver:
-      version: "147.0.7727.57" # Supports Chrome version 147. You can refer to https://googlechromelabs.github.io/chrome-for-testing
+      version: "147.0.7727.101" # Supports Chrome version 147. Verify at https://googlechromelabs.github.io/chrome-for-testing
+      #path: c:/users/david/.bzt/selenium-taurus/tools/drivers/chromedriver/148.0.7778.96/chromedriver-win64/chromedriver.exe
 reporting:
 - data-source: sample-labels
   module: junit-xml
